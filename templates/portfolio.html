@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for port in portfolio %}
+                <tr>
+                    <td><a href="/stock_detail?symbol={{ port['symbol'] }}">{{ port["symbol"] }}</a></td>
+                    <td>{{ port["shares"] }}</td>
+                    <td>{{ port["price"] }}</td>
+                    <td>{{ port["total"] }}</td>
+                </tr>
+            {% endfor %}
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Cash</td>
+                <td>{{ cashusd }}</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td>TOTAL</td>
+                <td>{{ totalusd }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+{% endblock %}

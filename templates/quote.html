@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <style>
+        /* Container for the box grid */
+        .box-container {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;  /* Space between boxes */
+            justify-content: center;
+        }
+
+        /* Each box inside the container */
+        .box {
+            width: 300px;
+            padding: 20px;
+            border: 2px solid #000;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        /* Style for the text inside the box */
+        .box p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Style for the button */
+        .box button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .box button:hover {
+            background-color: #45a049;
+        }
+
+        .note {
+            background-color: #ffeb3b;
+            color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+
+    <!-- Note about unavailable stocks -->
+    <div class="note">
+        Some stocks may be unavailable or have incorrect data.
+    </div>
+
+    <form action="/stock_detail" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Symbol" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Quote</button>
+    </form>
+    <br>
+    <div class="note">
+        Below is some stocks that exist
+    </div>
+
+    {% if stocks %}
+        <div class="box-container">
+            {% for stock in stocks %}
+                <div class="box">
+                    <form method="POST" action="/stock_detail">
+                        <input class="d-none" name="symbol" value={{ stock }}>
+                        <p>{{ stock }}</p>
+                        <button>Stock Detail</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
