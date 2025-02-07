@@ -1,8 +1,5 @@
 # Stocks Trading WebApp
 
-## Demo Video:
-[Link to Demo Video](https://youtu.be/jBBXri_KNqQ)
-
 ---
 
 ## Description:
